@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package match;
+option go_package = "grpc-gw/api/match";
+
+import "location.proto";
+import "google/protobuf/field_mask.proto";
+import "google/api/annotations.proto";
+
+
+// Estimation: storage model
+message Estimation {
+    int64 estimation_id = 1;
+    int64 user_id = 2;
+    location.Location starting_location = 3;
+    location.Location desitnation = 4;
+    string created_at = 5;
+    string eta = 6;
+    string fare = 7;
+    string status = 8;
+}
+// Estimation: wire model
+/*
+message Estimation {
+    string estimation_id = 1;
+    string user_id = 2;
+    location.Location starting_location = 3;
+    location.Location desitnation = 4;
+    string created_at = 5;
+    string eta = 6;
+    string fare = 7;
+    string status = 8;
+}
+*/
+
+
+
+// Match: storage model
+message Match {
+    int64 match_id = 1;
+    int64 driver_id = 2;
+    int64 user_id = 3;
+    int64 estimation_id = 4;
+    string status = 5;
+}
+
+
+service MatchService {
+
+    rpc estimate(EstimateRequest) returns (EstimateResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/estimation",
+            body: "*"
+        };
+    }
+    rpc match(MatchRequest) returns (Match) {
+        option (google.api.http) = {
+            post: "/api/v1/matches",
+            body: "*"
+        };
+    }
+    rpc updateMatch(UpdateMatchRequest) returns (Match) {
+        option (google.api.http) = {
+            patch: "/api/v1/matches",
+            body: "*"
+        };
+    }
+    rpc ListMatches(ListMatchesRequest) returns (ListMatchesResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/matches"
+        };
+    }
+
+}
+
+
+message EstimateRequest {
+    string parent = 1;
+    string starting_location = 2;
+    string destination = 3;
+}
+
+message EstimateResponse {
+    Estimation estimation = 1;
+}
+
+message MatchRequest {
+    string parent = 1;
+    string estimation_id = 2;
+}
+
+message UpdateMatchRequest {
+
+    int32 parent = 1;
+    Match match = 2;
+    google.protobuf.FieldMask update_mask = 3; // repeated
+}
+
+message ListMatchesRequest {
+    string parent = 1;
+    int32 page_size = 2;
+    string page_token = 3;
+}
+message ListMatchesResponse {
+    repeated Match matches = 1;
+    int32 page_size = 2;
+    string page_token = 3;
+}

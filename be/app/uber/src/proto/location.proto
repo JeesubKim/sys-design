@@ -1,0 +1,45 @@
+syntax = "proto3";
+package location;
+option go_package = "grpc-gw/api/location";
+
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+message Location {
+    string lat = 1;
+    string lng = 2;
+}
+
+service LocationService {
+    rpc getUserLocation(GetUserLocationRequest) returns (Location) {
+        option (google.api.http) = {
+            get: "/api/v1/location/{user_id}"
+        };
+    }
+    rpc getDriverLocation(GetDriverLocationRequest) returns (Location) {
+        option (google.api.http) = {
+            get: "/api/v1/location/{driver_id}"
+        };
+    }
+    rpc updateLocation(UpdateLocationRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/location",
+            body: "*"
+        };
+    }
+}
+
+
+message GetDriverLocationRequest {
+    int64 driver_id = 1;
+}
+
+message GetUserLocationRequest {
+    int64 user_id = 1;
+}
+
+
+message UpdateLocationRequest {
+    int64 parent = 1;
+    Location location = 2;
+}

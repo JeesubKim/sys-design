@@ -1,0 +1,23 @@
+.header__list{
+    display: flex;
+    align-items: center;
+    height:60px;
+    border-bottom: 1px solid rgb(248, 248, 248);
+    list-style: none;
+    gap:2rem;
+    padding-left:2rem;
+    padding-right:2rem;
+}
+.header__item {
+    
+    a{
+        text-decoration: none;
+        color:black;
+        padding:0.25rem 1rem;
+        border-radius: 2rem;
+        &:hover{
+            background-color: rgba(219, 219, 219, 0.445);
+            
+        }
+    }
+}
