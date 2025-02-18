@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.12"
 grpcio = "^1.70.0"
 grpcio-tools = "^1.70.0"
+pymongo = "^4.11.1"
+redis = "^5.2.1"
 
 
 [build-system]

@@ -49,7 +49,7 @@
         ]
       }
     },
-    "/api/v1/location/{driverId}": {
+    "/api/v1/location/driver/{driverId}": {
       "get": {
         "operationId": "LocationService_getDriverLocation",
         "responses": {
@@ -80,7 +80,7 @@
         ]
       }
     },
-    "/api/v1/location/{userId}": {
+    "/api/v1/location/user/{userId}": {
       "get": {
         "operationId": "LocationService_getUserLocation",
         "responses": {
@@ -130,6 +130,9 @@
         "parent": {
           "type": "string",
           "format": "int64"
+        },
+        "type": {
+          "type": "string"
         },
         "location": {
           "$ref": "#/definitions/locationLocation"

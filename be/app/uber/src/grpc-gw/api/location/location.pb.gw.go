@@ -143,7 +143,7 @@ func RegisterLocationServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/location.LocationService/GetUserLocation", runtime.WithHTTPPathPattern("/api/v1/location/{user_id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/location.LocationService/GetUserLocation", runtime.WithHTTPPathPattern("/api/v1/location/user/{user_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -163,7 +163,7 @@ func RegisterLocationServiceHandlerServer(ctx context.Context, mux *runtime.Serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/location.LocationService/GetDriverLocation", runtime.WithHTTPPathPattern("/api/v1/location/{driver_id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/location.LocationService/GetDriverLocation", runtime.WithHTTPPathPattern("/api/v1/location/driver/{driver_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -241,7 +241,7 @@ func RegisterLocationServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/location.LocationService/GetUserLocation", runtime.WithHTTPPathPattern("/api/v1/location/{user_id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/location.LocationService/GetUserLocation", runtime.WithHTTPPathPattern("/api/v1/location/user/{user_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -258,7 +258,7 @@ func RegisterLocationServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/location.LocationService/GetDriverLocation", runtime.WithHTTPPathPattern("/api/v1/location/{driver_id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/location.LocationService/GetDriverLocation", runtime.WithHTTPPathPattern("/api/v1/location/driver/{driver_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -292,8 +292,8 @@ func RegisterLocationServiceHandlerClient(ctx context.Context, mux *runtime.Serv
 }
 
 var (
-	pattern_LocationService_GetUserLocation_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "location", "user_id"}, ""))
-	pattern_LocationService_GetDriverLocation_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v1", "location", "driver_id"}, ""))
+	pattern_LocationService_GetUserLocation_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v1", "location", "user", "user_id"}, ""))
+	pattern_LocationService_GetDriverLocation_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v1", "location", "driver", "driver_id"}, ""))
 	pattern_LocationService_UpdateLocation_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "location"}, ""))
 )
 

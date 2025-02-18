@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "6d5988b7-84dc-4c29-843c-d022a46a5b2a",
+		"name": "location",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12161691"
+	},
+	"item": [
+		{
+			"name": "get_location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/location/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"location",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

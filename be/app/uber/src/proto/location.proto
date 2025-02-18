@@ -13,12 +13,12 @@ message Location {
 service LocationService {
     rpc getUserLocation(GetUserLocationRequest) returns (Location) {
         option (google.api.http) = {
-            get: "/api/v1/location/{user_id}"
+            get: "/api/v1/location/user/{user_id}"
         };
     }
     rpc getDriverLocation(GetDriverLocationRequest) returns (Location) {
         option (google.api.http) = {
-            get: "/api/v1/location/{driver_id}"
+            get: "/api/v1/location/driver/{driver_id}"
         };
     }
     rpc updateLocation(UpdateLocationRequest) returns (google.protobuf.Empty) {
@@ -41,5 +41,6 @@ message GetUserLocationRequest {
 
 message UpdateLocationRequest {
     int64 parent = 1;
-    Location location = 2;
+    string type = 2; 
+    Location location = 3;
 }
