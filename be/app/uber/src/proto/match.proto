@@ -8,30 +8,19 @@ import "google/protobuf/field_mask.proto";
 import "google/api/annotations.proto";
 
 
-// Estimation: storage model
-message Estimation {
-    int64 estimation_id = 1;
-    int64 user_id = 2;
-    location.Location starting_location = 3;
-    location.Location desitnation = 4;
-    string created_at = 5;
-    string eta = 6;
-    string fare = 7;
-    string status = 8;
-}
-// Estimation: wire model
-/*
+// wire model
 message Estimation {
     string estimation_id = 1;
     string user_id = 2;
     location.Location starting_location = 3;
-    location.Location desitnation = 4;
+    location.Location destination = 4;
     string created_at = 5;
     string eta = 6;
     string fare = 7;
     string status = 8;
+    string range = 9;
 }
-*/
+
 
 
 
@@ -76,8 +65,8 @@ service MatchService {
 
 message EstimateRequest {
     string parent = 1;
-    string starting_location = 2;
-    string destination = 3;
+    location.Location starting_location = 2;
+    location.Location destination = 3;
 }
 
 message EstimateResponse {

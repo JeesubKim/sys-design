@@ -234,6 +234,8 @@
     <!-- 모달 -->
     <div class="modal-overlay" id="modalOverlay"></div>
     <div class="modal" id="modal">
+
+        <div id="estimationResult" style="text-align: center; font-size: 20px; font-weight: bold; margin-top: 15px;"></div>
         <h3>Match Options</h3>
         <label for="radius">범위 선택:</label>
         <select id="radius">
@@ -310,7 +312,7 @@
 
         // 드라이버 위치 업데이트
         function updateDrivers() {
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 100; i++) {
                 fetch(`http://localhost:8080/api/v1/location/driver/${i}`)
                     .then(response => response.json())
                     .then(data => {
@@ -345,11 +347,20 @@
         function sendEstimationRequest() {
             let currentLocation = document.getElementById('currentLocation').value;
             let destination = document.getElementById('destination').value;
-
-            let data = {
-                starting_point: currentLocation,
-                destination: destination
+            const range = document.getElementById('radius').value;
+            const data = {
+                parent: "1",
+                starting_location: {
+                    lng: "47.598693",
+                    lat: "-122.035366"
+                },
+                destination: {
+                    lng: "47.664045",
+                    lat: "122.100561"
+                },
+                range
             };
+
 
             fetch('http://localhost:8080/api/v1/estimation', {
                 method: 'POST',
@@ -359,6 +370,19 @@
             .then(response => response.json())
             .then(responseData => {
                 console.log('Cost Estimation:', responseData);
+                const eta = responseData.estimation.eta || "N/A";
+                const fare = responseData.estimation.fare || "N/A";
+                const estimation_id = responseData.estimation.estimationId
+
+                document.getElementById('estimationResult').innerHTML = `
+                    <span class="estimation_id" style="font-size:0.65rem;"> ${estimation_id}</span>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <span class="material-icons" style="color: #00BFAE;">schedule</span> <span>${eta}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
+                        <span class="material-icons" style="color: #e74c3c;">attach_money</span> <span>${fare}</span>
+                    </div>
+                `;
                 showModal();
             })
             .catch(error => console.error('Error:', error));
@@ -381,6 +405,27 @@
             let radius = document.getElementById('radius').value;
             console.log(`Sending match request with radius: ${radius} miles`);
             // 실제 POST 요청을 보낼 수 있는 코드 추가
+
+            const url = 'http://localhost:8080/api/v1/match'; // API 엔드포인트
+            
+            const data = {
+
+            }
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // JSON 데이터 전송
+                },
+                    body: JSON.stringify(data) // 데이터를 JSON 문자열로 변환
+                })
+            .then(response => response.json())  // 응답을 JSON으로 파싱
+            .then(data => {
+                    console.log('Success:', data);
+                })
+            .catch(error => {
+                    console.error('Error:', error);
+                });
+                
             closeModal();
         }
 

@@ -171,10 +171,10 @@
           "type": "string"
         },
         "startingLocation": {
-          "type": "string"
+          "$ref": "#/definitions/locationLocation"
         },
         "destination": {
-          "type": "string"
+          "$ref": "#/definitions/locationLocation"
         }
       }
     },
@@ -190,17 +190,15 @@
       "type": "object",
       "properties": {
         "estimationId": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
         "userId": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
         "startingLocation": {
           "$ref": "#/definitions/locationLocation"
         },
-        "desitnation": {
+        "destination": {
           "$ref": "#/definitions/locationLocation"
         },
         "createdAt": {
@@ -214,9 +212,12 @@
         },
         "status": {
           "type": "string"
+        },
+        "range": {
+          "type": "string"
         }
       },
-      "title": "Estimation: storage model"
+      "title": "wire model"
     },
     "matchListMatchesResponse": {
       "type": "object",

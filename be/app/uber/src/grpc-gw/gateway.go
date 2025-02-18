@@ -34,7 +34,7 @@ func startGrpcGateway(ctx context.Context, gwMux *runtime.ServeMux) error {
 	// 각 서비스별 gRPC 서버 주소 설정
 	serviceEndpoints := map[string]string{
 		"LocationService": "localhost:50050",
-		"MatchService":    "localhost:50052",
+		"MatchService":    "localhost:60050",
 	}
 
 	// LocationService 핸들러 등록

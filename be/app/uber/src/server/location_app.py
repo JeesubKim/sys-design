@@ -2,7 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 import grpc
 import json
 from location_pb2 import Location, GetDriverLocationRequest, GetUserLocationRequest, UpdateLocationRequest
-from google.protobuf.json_format import MessageToDict
+from google.protobuf.json_format import MessageToDict, ParseDict
 
 import location_pb2_grpc
 from datetime import datetime
